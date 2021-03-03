@@ -6,8 +6,6 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "cheerio-html-to-text": "^0.4.4",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "cron": "^1.7.0",
