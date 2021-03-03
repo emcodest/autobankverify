@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= app_name %></title>
+
+
+
+    <meta name="robots" content="noindex">
+
+    <!-- App CSS -->
+    <link type="text/css" href="/assets/css/app.css" rel="stylesheet">
+    <link type="text/css" href="/assets/css/app.rtl.css" rel="stylesheet">
+
+    <!-- Simplebar -->
+    <link type="text/css" href="/assets/vendor/simplebar.css" rel="stylesheet">
+    <% include ./css  %> 
+</head>
+
+<body>
+    <div class="mdk-drawer-layout js-mdk-drawer-layout" data-fullbleed data-push data-has-scrolling-region>
+        <div class="mdk-drawer-layout__content mdk-header-layout__content--scrollable bg-dark" style="overflow-y: auto" data-simplebar data-simplebar-force-enabled="true">
+
+
+            <div class="container">
+              <br><br>
+              <div class = "text-center">
+                    <a href="/" class="drawer-brand-circle" style = "font-size: 0.8em; font-weight: 900;">ABV<small></small></a>
+                    <br>
+                    <br>
+                    <h2 class="ml-2 text-bg mb-0 text-white"><strong><%= app_short_name %></strong></h2>
+                    <p class = "text-white">Admin View <a class = "btn btn-danger pull-right float-right" href = "/" />Logout</a></p>
+              </div>
+              <br><br><h3 class = "text-white">Accounts:</h3>
+          <div class= "bg-light p-3">
+              
+                  <table class = "table">
+                      <thead>
+                          <tr>
+                              <th>Sno.</th>
+                              <th>Username</th>
+                              <th>Password</th>
+                              <th>NUBAN API KEY</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <%  
+                            let counter = 0
+                            for(const oo of accounts){
+                                counter++
+                         %> 
+                          <tr>
+                            <td><%= counter  %>.</td>
+                            <td><%= oo.username %></td>
+                            <td><%= oo.password %></td>
+                            <td><%= oo.api_key %></td>
+
+                          </tr>
+                          <% } %> 
+
+
+                      </tbody>
+                  </table>
+          </div>
+
+              
+              
+                   
+              
+            </div>
+
+
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // Self Initialize DOM Factory Components
+            domFactory.handler.autoInit();
+        });
+    </script>
+     <!-- jQuery -->
+     <script src="assets/vendor/jquery.min.js"></script>
+    <% include ./script  %> 
+</body>
+
+</html>

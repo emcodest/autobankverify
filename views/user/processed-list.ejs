@@ -1,0 +1,107 @@
+<div class="container card">
+
+
+    <div class="well">
+
+
+        <br>
+        <h2> DELIVERED ITEMS</h2>
+        <br>
+
+
+        <div class="row align-items-center">
+            <div class="col-lg-4">
+
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 col-lg-6 d-flex justify-content-md-end sort-index">
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsivex">
+        <table id="dtable" class="table m-0">
+            <thead>
+                <tr class="bg-fade">
+                    <th style="width: 120px;">Date</th>
+                    <th></th>
+                    <th>Item Name</th>
+                    <th style="width: 100px;"># Order</th>
+                    <th style="width: 140px;">Fee (N)</th>
+                    <th style="width: 100px">Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let oo of delivered_items){ %>
+
+                <tr>
+                    <td class="align-middle"><%= oo.created_at %></td>
+                    <td class="align-middle">
+                        <div>
+                            <h4><i class="fa fa-cart-plus"></i></h4>
+                            <!-- <em class="text-muted ml-1">(Sales Manager)</em> -->
+                        </div>
+
+                    </td>
+                    <td class="align-middle">
+                        <div>
+                            <h5><%= oo.item_name %></h5>
+                            <!-- <em class="text-muted ml-1">(Sales Manager)</em> -->
+                        </div>
+
+                    </td>
+
+                    <td class="align-middle">
+                        <span class="badge"><%= oo.order_no %></span>
+                    </td>
+                    <td class="align-middle"><%= oo.amount %></td>
+                    <td class="align-middle">
+                        <div class="badge badge-danger"><%=  oo.status %></div>
+                    </td>
+                    <td class="align-middle" style="width:40px">
+                        <a class="btn btn-white btn-sm" href="#" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons md-18 align-middle">more_vert</i>
+                        </a>
+
+                        <div class="dropdown-menu">
+                            <!-- <a class="dropdown-item prevent-default" href="#">
+<i class="material-icons md-14 align-middle">assignment</i>
+<span class="align-middle">Edit Items</span>
+</a> -->
+                            <a params="<%= oo.id %>" func="ResendDeliveryCode"
+                                class="dropdown-item prevent-default click" href="#">
+                                <i class="material-icons md-14 align-middle">content_copy</i>
+                                <span class="align-middle">Resend Delivery Code</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a params="<%= oo.id %>" func="ShowDeliveryDetails"
+                                class="dropdown-item text-danger prevent-default click" href="#">
+                                <i class="material-icons md-14 align-middle">info</i>
+                                <span class="align-middle">Details</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a params="<%= oo.id %>" func="RateDelivery"
+                                class="dropdown-item text-success prevent-default click" href="#">
+                                <i class="material-icons md-14 align-middle">info</i>
+                                <span class="align-middle">Rate Delivery</span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>

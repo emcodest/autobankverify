@@ -1,0 +1,49 @@
+<br><br>
+<div class = "card mx-auto w-80">
+    
+   
+    <% include ./subview/make-request  %> 
+    
+    <% include ./subview/get-request-pricing  %> 
+
+
+
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpTTPi4R4Kf7cKmaN6TYOyrpmElo95q6E&libraries=places"></script>
+
+<script>
+    function initialize() {
+            var input = document.getElementById('pickup');
+            var input2 = document.getElementById('delivery');
+            new google.maps.places.Autocomplete(input);
+            new google.maps.places.Autocomplete(input2);
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        window.onload = function(){
+
+            //: restart delivery request
+            const params = new URLSearchParams(window.location.search)
+            //params.get("checkpoint")
+            if(params.has("checkpoint")){
+
+                let get_details =  window.localStorage.getItem("LAST_REQUEST")
+              
+               // alert(params.get("checkpoint"))
+                if(get_details){
+                    
+                    get_details = JSON.parse(get_details)
+                    
+                    $(".item-name").val(get_details.item_name)
+                    $(".receiver-name").val(get_details.receiver_name)
+                    $(".receiver-phone").val(get_details.receiver_phone)
+                    $(".vehicle-type").val(get_details.vehicle_type)
+                    $("#pickup").val(get_details.pickup)
+                    $("#delivery").val(get_details.delivery)
+                    $("[func=GetServiceCharge]").trigger("click")
+                }
+            }
+        }
+</script>

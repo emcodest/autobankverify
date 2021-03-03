@@ -1,0 +1,123 @@
+<div class="container-fluid">
+    <div class = "well card">
+       
+       
+       
+        
+      <div class = "text-center p-2 bg-dark">
+          
+          
+           
+            
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+                    <h3 class = "text-white"> DOWNLOAD ACCOUNT SHEET TEMPLATE</h3>
+
+                    
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <a href = "/Bank_Verification_Template.xlsx" class = "btn btn-lg btn-primary text-white" style = 'width: 200px'> <i class = "fa fa-download"></i> Download</a>
+                    
+                </div>
+            </div>
+            
+            
+      </div>
+    </div>
+    <br><br>
+    <div class="row font-1">
+        <div class="col-lg-4">
+            <div class="card card-body flex-row align-items-center bg-white">
+               
+                <div class="text-primary ml-auto">
+                    <label>Batch Name (any name)</label>
+                    <input class = "batch-box form-control" type = "text" placeholder = "batch name" size = "32" /><br><br>
+                    <button params = "" func = "UploadSheet" class = "btn btn-primary btn-lg click"><i class = "fa fa-cloud-upload"></i> Upload Account Sheet</button>
+                    <input style = "opacity: 0" type = "file" id = "uploadsheet" />
+                </div>
+                   
+            </div>
+        </div>
+        <div class="col-lg-8">
+
+            
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="card card-body mb-0 text-center">
+                        <div class="media align-items-center">
+                            <div class="media-body">
+                                <p class="card-text text-muted mb-1">Verified</p>
+                                <h1 class="mb-0 font-weight-normal"><%= verified %></h1>
+                                <br>
+                                <br>
+                        <div class = "text-center">
+                            
+                                    <a href = "/user/report?_skipid=yes&_verified=VERIFIED" class = "btn btn-primary">View</a>
+                        </div>
+                            </div>
+                         
+                              
+                           
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="card card-body mb-0 text-center bg-white">
+                        <div class="media align-items-center">
+                            <div class="media-body">
+                                <p class="card-text text-muted mb-1">UnVerified</p>
+                                <h1 class="mb-0 font-weight-normal"><%= unverified %></h1>
+                                <br>
+                                <br>
+                        <div class = "text-center">
+                            
+                                    <a href = "/user/report?_skipid=yes&_verified=UNVERIFIED" class = "btn btn-primary">View</a>
+                        </div>
+                            </div>
+                         
+                              
+                           
+                        </div>
+                    </div>
+                    
+                </div>
+             
+               
+            </div>
+            
+
+        </div>
+ 
+   
+    </div>
+    
+  
+  
+
+    <div class="card p-3">
+       
+        <% include ./subview/batches %>
+    </div>
+</div>
+<script>
+
+    window.onload = function(){
+      // alert("")
+    //    dashboard.$set(dashboard.$root, 'mobj', {checkpoint: true})
+    //    
+    
+        if( window.localStorage.getItem("LAST_REQUEST")){
+          //setTimeout(() => {
+           // alert(22)
+            //document.getElementById("checkpoint").style.display = "block"
+              $(".checkpoint").show(500)
+             // dashboard.$set(dashboard.$root, 'mobj', {checkpoint: true})
+              
+          //}, 200);
+           
+          
+        }
+    }
+</script>

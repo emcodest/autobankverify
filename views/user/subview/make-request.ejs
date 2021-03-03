@@ -1,0 +1,70 @@
+<div class = "h-center p-3" v-if = "show_view == true">
+    
+   
+
+    <h2 class = "uppercase">New Request</h2>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group">
+                <label>Item Name</label>
+                <input class = "form-control item-name" type = "text" placeholder = "Enter name" />
+            </div>
+            <div class="form-group">
+                <label>Receiver Name</label>
+                <input class = "form-control receiver-name" type = "text" placeholder = "full name" />
+            </div>
+            <div class="form-group">
+                <label>Receiver Phone</label>
+                <input class = "form-control receiver-phone" type = "text" placeholder = "phone number" />
+            </div>
+
+            
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group">
+                <label>Pickup Location</label>
+                <input id = "pickup" class = "form-control" type = "text" placeholder = "Where do you want us to pick the item" />
+            </div>
+            <div class="form-group">
+                <label>Delivery Address</label>
+                <input id = "delivery" class = "form-control" type = "text" placeholder = "Delivery Address" />
+            </div>
+            <div class="form-group">
+                <label>Type of vehicle</label>
+              <div class = "select-box">
+                  <div class = "cover-white"></div>
+                    <select class = "form-control vehicle-type">
+                        <option value = "motorcycle">MotorCycle</option>
+                        <option value = "van">Van</option>
+                        <option value = "truck">Truck</option>
+                    </select>
+                  
+              </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group">
+                <label>Delivery Address</label>
+                <input id = "delivery" class = "form-control" type = "text" placeholder = "Delivery Address" />
+            </div>
+            
+        </div> -->
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+          
+            
+        </div>
+        
+    </div>
+
+    <button func = "GetServiceCharge" class = "btn btn-primary click">Get Service Charge</button>
+    
+</div>

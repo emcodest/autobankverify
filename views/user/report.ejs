@@ -1,0 +1,99 @@
+<div class = "container">
+    
+    <div class="well">
+    
+       
+            <br>
+            <h2>Report</h2>
+            <p><b>Batch Name: </b> <%= batch_name %></p>
+            <p><button func ="ExportReport" params = "<%= report_id %>" req = "<%= report_type %>" class = "btn btn-primary click">Export Report To Excel (All)</button></p>
+            <br>
+           
+            <% if(report_type == "batch"){ %> 
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <p><button req2 = "VERIFIED" func ="ExportReport2" params = "<%= report_id %>" req = "<%= report_type %>" class = "btn btn-success click">Export (Only Verified)</button></p>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <p><button req2 = "UNVERIFIED" func ="ExportReport2" params = "<%= report_id %>" req = "<%= report_type %>" class = "btn btn-danger click">Export (Only UnVerified)</button></p>
+                </div>
+            </div>
+            <% } %> 
+             <hr>
+        
+       
+        <div class="row align-items-center">
+            <div class="col-lg-4">
+               
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-md-4 col-lg-6 d-flex justify-content-md-end sort-index">
+                       
+                     
+                    </div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsivex">
+        <table id = "dtable" class="table m-0">
+            <thead>
+                <tr class="bg-fade">
+                    <th></th>
+                    <th style="width: 120px;">Last Updated</th>
+                    <!-- <th style="width: 120px;">Date</th> -->
+                   
+                    <th>Bank Name</th>
+                    <th style="width: 100px;"># Account Number</th>
+                   
+                    <th style="width: 100px">Account Name</th>
+    
+                    <th style="width: 100px">Status</th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let oo of report){ %> 
+    
+                <tr>
+                    <td></td>
+                    <td class="align-middle"><%= oo.updated_at %></td>
+                    <td class="align-middle">
+                        <div>
+                            <h5><%= oo.bank_name %></h5>
+                        </div>
+    
+                    </td>
+                    <td class="align-middle">
+                        <div>
+                            <h5><%= oo.account_number %></h5>
+                            <!-- <em class="text-muted ml-1">(Sales Manager)</em> -->
+                        </div>
+    
+                    </td>
+                    <td class="align-middle">
+                        <div>
+                            <h5><%= oo.account_name %></h5>
+                            <!-- <em class="text-muted ml-1">(Sales Manager)</em> -->
+                        </div>
+    
+                    </td>
+                    <td class="align-middle">
+                        <div>
+                            <h5><%= oo.status %></h5>
+                            <!-- <em class="text-muted ml-1">(Sales Manager)</em> -->
+                        </div>
+    
+                    </td>
+    
+                   
+                </tr>
+            <% } %> 
+    
+      
+            </tbody>
+        </table>
+    </div>
+</div>

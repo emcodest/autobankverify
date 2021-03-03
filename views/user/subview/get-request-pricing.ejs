@@ -1,0 +1,102 @@
+<div class = "view-hide">
+    <div  v-if = "! show_view">
+        <div class = "h-center p-3">
+           <div class = "pull-right">
+                <input class = "add-money-box form-control" type = "text" placeholder = "Amount" size = "11" /><br><br>
+                <button params = "invoice_no" func = "AddMoney" class = "btn btn-primary click">Add Money To Wallet</button>
+           </div>
+            
+            <h2>Service Charge - Best Rates</h2>
+            <br>
+           
+           <div class="row">
+           
+
+               <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" v-for = "data in mobj">
+                   <div class = "card p-3">
+                      <div>
+                           <b>{{data.name}}</b> <br>
+                           <hr>
+                      </div>
+                      
+                       <div class="custom-control custom-radio mb-1">
+                          
+                        <input :value = "data.price" type="radio" :id="data.log_company_id" name="customRadio" class="custom-control-input">
+                        <label class="custom-control-label align-middle" :for="data.log_company_id">NGN {{data.price}}</label>
+
+                        <p>{{data.distance.text}}, {{data.duration.text}}</p>
+                    </div>
+                    
+                   </div>
+                  
+               </div>
+          
+             
+           </div>
+           <br>
+           
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <p>{{details.item_name}}</p>
+                    
+                    </div>
+                    
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        
+                    <div class="form-group">
+                        <label>Pickup Location</label>
+                        <p>{{details.pickup}}</p>
+                      
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        
+                    <div class="form-group">
+                        <label>Delivery Address</label>
+                        <p>{{details.delivery}}</p>
+                      
+                    </div>
+                    
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        
+                    <div class="form-group">
+                        <label>Receiver Name</label>
+                        <p>{{details.receiver_name}}</p>
+                     
+                    </div>
+                    
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        
+                    <div class="form-group">
+                        <label>Receiver Phone</label>
+                        <p>{{details.receiver_phone}}</p>
+                     
+                    </div>
+                    
+                </div>
+            </div>
+        <div class = "row">
+            <div class = "col-md-6">
+                <button params = "" func = "MakePayment" class = "btn btn-danger click">Make Payment From Wallet</button>  
+            </div>
+            <div class = "col-md-6">
+              
+            </div>
+            
+               
+            
+              
+        </div>
+            
+        </div>
+    </div>
+</div>
