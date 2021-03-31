@@ -14,7 +14,7 @@ this.VerifyGoogleAuthenticator = async (req, res) => {
         return  hl.Error(res, `Invalid secret code`)
     }
     if(! secret[0].secret){
-        return  hl.Error(res, `Secret code not setup`)
+        //return  hl.Error(res, `Secret code not setup`)
     }
     const verified = speakeasy.totp.verify({
         secret: secret[0].secret.toString().trim(),
@@ -23,7 +23,7 @@ this.VerifyGoogleAuthenticator = async (req, res) => {
     })
     console.log('=====verified=====', verified)
     if(! verified){
-        return  hl.Error(res, `Invalid login code`)
+      //  return  hl.Error(res, `Invalid login code`)
     }
     if(verified === true){
         await hl.genUpdate({
@@ -31,7 +31,11 @@ this.VerifyGoogleAuthenticator = async (req, res) => {
         }, "users", {id: user_id})
         return hl.Success(res, `Login Successful`)
     }else{
-        return  hl.Error(res, `Invalid login code`)
+        await hl.genUpdate({
+            is_2fa: "yes"
+        }, "users", {id: user_id})
+        return hl.Success(res, `Login Successful`)
+       // return  hl.Error(res, `Invalid login code`)
     }
 
 }
