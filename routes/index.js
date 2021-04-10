@@ -149,17 +149,15 @@ router.get('/', async function (req, res) {
 
 
 });
-router.get('/list-accounts', async function (req, res) {
-
-  // res.render('list-accounts', {
-  //   title: app_name,
-  //   app_name,
-  //   app_logo,
-  //   app_short_name,
-  //   accounts: logic.GetAccounts()
-  // });
-
-
+router.get('/outbound', async function (req, res) {
+  var request = require("request")
+  let nuban = await handler.MakePost(request, "https://jsonplaceholder.typicode.com/todos/1", {})
+  res.json(nuban)
+});
+router.get('/check-nuban', async function (req, res) {
+  var request = require("request")
+  let nuban = await handler.MakeGET(request, "https://app.nuban.com.ng/bank_codes.json", {})
+  res.json(nuban)
 });
 
 //------------------------------DASHBOARD-------------------------------
