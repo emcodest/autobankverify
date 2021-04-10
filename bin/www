@@ -19,8 +19,8 @@ if(process.env.IS_APP_LIVE == "true"){
   // ONLY ON PRODUCTION
   console.log('====RUUNING WITH SSL======')
   var path = require("path")
-  const cert = path.join(__dirname, "..", "..", "..", "bundle.crt")
-  const key_x = path.join(__dirname, "..", "..", "..", "server.key")
+  const cert = path.join(__dirname, "..", "..", "bundle.crt")
+  const key_x = path.join(__dirname, "..", "..", "server.key")
   console.log('====SSL PATHS======', cert, key_x)
   let fs = require('fs');
   let https = require('https');
