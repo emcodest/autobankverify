@@ -37,13 +37,15 @@ if(process.env.IS_APP_LIVE == "true"){
   server = https.createServer(credentials, app);
 }else{
   console.log('====WITHOUT SSL======')
-  logic.CreateDefaultAccounts().then(_accounts => {
-     // console.log('==========', _accounts)
-
-  })
+ 
   let http = require('http');
   server = http.createServer(app);
 }
+
+logic.CreateDefaultAccounts().then(_accounts => {
+  // console.log('==========', _accounts)
+
+})
 
 
 server.listen(port);
