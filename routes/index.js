@@ -192,24 +192,18 @@ router.get('/user/:view', handler.authenticated, async function (req, res, next)
     app_logo,
     app_short_name
   } 
-    //: check if 2a is enabled
-    const check_2fa = await hl.bindRawQuery("select id from users where is_2fa= 'yes' and id = $idd", {idd: uid})
+    
   //         if admin
   //--------------------------------
   if(req.user.username == "admin"){
-    odata.accounts = logic.GetAccounts2()
-    if(check_2fa.length < 1){
-      //ANCHOR
-      return res.redirect("/")
-    }
+//    odata.accounts = logic.GetAccounts2()
+    odata.accounts = await handler.bindRawQuery("select * from users order by id asc limit 100")
+    
     return  res.render("admin", odata)
   }
   //---------------------------------
      
-      if(check_2fa.length < 1){
-        //ANCHOR
-        return res.redirect("/")
-      }
+     
       //: SWITCH VIEWS
       switch (view) {
         case "home":

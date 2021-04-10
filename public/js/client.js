@@ -1,32 +1,7 @@
 
  var methods = {}
 
-// LOGIN, REGISTER AND FORGOT PASSWORD
-//! - - - - - - - - - -- - - - - - -
-methods.Set2fa = function () {
-  
-     
-     var form = dashboard.$data.mobj
-    
-     var url = _app.GetAuthURL("Account", "VerifyGoogleAuthenticator")
-     
-     _app.Ajax(url, form, "json", function (res) {
-       
-        if(res.success){
-            
-            setTimeout(function() {
-            
-               window.location.href = "/user/home"
-                
-           }, 3000)
-         
-        }
-        
 
-     })
-
-
- }
  methods.Login = function () {
   
      
@@ -39,16 +14,16 @@ methods.Set2fa = function () {
     //   alert(res)
         if(res.success){
             
-            // console.log('===RES=======', res)
-            // console.log('====IMG======', res.data.img)
-            $(".show_2fa_img").html(res.data.img)
-            dashboard.$set(dashboard.mobj, 'show_2fa_code', true)
-            dashboard.$set(dashboard.mobj, 'show_2fa_btn', true)
-           // setTimeout(function() {
+           
+            // $(".show_2fa_img").html(res.data.img)
+            // dashboard.$set(dashboard.mobj, 'show_2fa_code', true)
+            // dashboard.$set(dashboard.mobj, 'show_2fa_btn', true)
+            setTimeout(function() {
             
-              //  window.location.href = "/user/home"
-                
-           // }, 1000);
+                window.location.href = "/user/home"
+                 
+            }, 2000)
+          
         }
         
 
@@ -252,4 +227,68 @@ methods.UploadSheet = function(params, _this, e){
     
         
    
+}
+//--------------------------------
+methods.ViewUser = function (_p, _this, e) {
+  
+    
+    var form = {user_id: _p}
+    var url = _app.GetAPI("Dialog", "ViewUser")
+    
+    _app.Ajax(url, form, "json", function (res) {
+        
+       $(".modal-title").html("")
+       $(".modal-body").html("")
+       //-----------------------
+       $(".modal-title").html(res.title)
+       $(".modal-body").html(res.body)
+       $("#modal-id").modal("show")
+
+    })
+
+
+}
+methods.EditUser = function (_p, _this, e) {
+  
+    
+    var form = {user_id: _p}
+    var url = _app.GetAPI("Dialog", "EditUser")
+    
+    _app.Ajax(url, form, "json", function (res) {
+        
+       $(".modal-title").html("")
+       $(".modal-body").html("")
+       //-----------------------
+       $(".modal-title").html(res.title)
+       $(".modal-body").html(res.body)
+       $("#modal-id").modal("show")
+
+    })
+
+
+}
+methods.SaveUser = function (_p, _this, e) {
+    var read = {user_id: _p}
+    var get_inputs = _this.attr("req")
+    var l_inpt = get_inputs.split(",")
+    for(let oo of l_inpt){
+        var mm = oo.trim()
+        read[mm] = $("."+mm).val()
+    }
+    var form = read
+    var url = _app.GetAPI("Dialog", "SaveUser")
+    
+    _app.Ajax(url, form, "json", function (res) {
+        
+        if (res.success) {
+ 
+            setTimeout(function() {
+ 
+                window.location.href = window.location.href.toString()
+ 
+            }, 3000);
+        }
+    })
+
+
 }

@@ -2,6 +2,8 @@
 <html lang="en" dir="ltr">
 
 <head>
+
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,7 +19,8 @@
 
     <!-- Simplebar -->
     <link type="text/css" href="assets/vendor/simplebar.css" rel="stylesheet">
-    <% include ./css  %> 
+    <% include ./css  %>
+   
 </head>
 
 <body>
@@ -76,8 +79,8 @@
                                     </div>
                                 </div>
                                 <div class="text-centerx">
-                                    <button v-if = "! mobj.show_2fa_btn"  @click = "Login" class = "btn btn-primary btn-lg">Login</button>
-                                    <button v-if = "mobj.show_2fa_btn"  @click = "Set2fa" class = "btn btn-danger btn-lg 2fa">Verify & Login</button>
+                                    <button  @click = "Login" class = "btn btn-primary btn-lg">Login</button>
+                                  
                                   
                                 </div>
                         
@@ -106,6 +109,7 @@
      <!-- jQuery -->
      <script src="assets/vendor/jquery.min.js"></script>
     <% include ./script  %> 
+
 </body>
 
 </html>
