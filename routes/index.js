@@ -205,7 +205,9 @@ router.get('/user/:view', handler.authenticated, async function (req, res, next)
       //: SWITCH VIEWS
       switch (view) {
         case "home":
-          const home_batches = await hl.bindRawQuery("select date_format(created_at, '%d %M, %Y %H:%i:%s') as created_at, id, batch_name, (select count(1) from cache_accounts where batch_id = x.id) as cnt from batch_list x where user_id = $uid order by id desc limit 10", {uid: user_id})
+          let from_tz_1 = await hl.GetSessionTimeZone()
+          let to_tz_1 = '+01:00'
+          const home_batches = await hl.bindRawQuery(`select date_format(convert_tz(created_at, '${from_tz_1}', '${to_tz_1}'), '%d %M, %Y %H:%i:%s') as created_at, id, batch_name, (select count(1) from cache_accounts where batch_id = x.id) as cnt from batch_list x where user_id = $uid order by id desc limit 10`, {uid: user_id})
           odata.batches = home_batches
           //: total verified accounts of the user
           let verified = await hl.bindRawQuery("select count(1) as cnt from cache_accounts where user_id= $uid and status = 'VERIFIED'", {uid: user_id})
@@ -215,7 +217,12 @@ router.get('/user/:view', handler.authenticated, async function (req, res, next)
           //: and total unverified accounts
           break;
         case "uploaded-batches":
-          const all_batches = await hl.bindRawQuery("select date_format(created_at, '%d %M, %Y %H:%i:%s') as created_at, id, batch_name, (select count(1) from cache_accounts where batch_id = x.id) as cnt from batch_list x where user_id = $uid order by id desc limit 1000", {uid: user_id})
+         
+       
+    
+          let from_tz = await hl.GetSessionTimeZone()
+          let to_tz = '+01:00'
+          const all_batches = await hl.bindRawQuery(`select date_format(convert_tz(created_at, '${from_tz}', '${to_tz}'), '%d %M, %Y %H:%i:%s') as created_at, id, batch_name, (select count(1) from cache_accounts where batch_id = x.id) as cnt from batch_list x where user_id = $uid order by id desc limit 1000`, {uid: user_id})
           odata.batches = all_batches
           break;
         case "report":

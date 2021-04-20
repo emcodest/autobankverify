@@ -34,6 +34,7 @@
                 <th style="width: 100px;"># Total</th>
                
                 <th style="width: 100px">Report</th>
+                <th>Action</th>
               
             </tr>
         </thead>
@@ -59,6 +60,9 @@
 
                 <td class="align-middle">
                   <a class = "btn btn-primary" href = "/user/report?_id=<%= oo.id %>">View Report</a>
+                </td>
+                <td class="align-middle">
+                <button func = "DeleteBatch" params = "<%= oo.id %>"  class = "btn btn-danger click">Delete Batch</button>
                 </td>
                
             </tr>

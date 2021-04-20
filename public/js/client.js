@@ -292,3 +292,24 @@ methods.SaveUser = function (_p, _this, e) {
 
 
 }
+methods.DeleteBatch = function (_p, _this, e) {
+    if(confirm("Are you sure ?") == false)
+    return
+ 
+    var form = {id: _p}
+    var url = _app.GetAPI("Dialog", "DeleteBatch")
+    
+    _app.Ajax(url, form, "json", function (res) {
+        
+        if (res.success) {
+ 
+            setTimeout(function() {
+ 
+                window.location.href = window.location.href.toString()
+ 
+            }, 3000);
+        }
+    })
+
+
+}
