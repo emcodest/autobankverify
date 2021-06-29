@@ -3,8 +3,20 @@
     <div class="well">
     
        
-            <br>
-            <h2>Report</h2>
+           <h1>Report</h1>
+            <h3>Estimated Completion Time</h3>
+            <p><b>Task: </b> <span id = "VERIFIED">...</span> / <span id = "TOTAL">....</span></p>
+           
+            <p><b>Countdown: </b> <span id = "TRACK"></span></p>
+            <div class="progress" style="height: 20px;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+              </div>
+              <br>
+              <button params = "<%= report_id %>" func  = "RestartBatch" class = "btn btn-sm btn-danger click">Restart Verification</button>
+              <hr>
+             
+              <br>
+          
             <p><b>Batch Name: </b> <%= batch_name %></p>
             <p><button func ="ExportReport" params = "<%= report_id %>" req = "<%= report_type %>" class = "btn btn-primary click">Export Report To Excel (All)</button></p>
             <br>
@@ -52,6 +64,8 @@
     
                     <th style="width: 100px">Status</th>
                   
+                    
+                  
                 </tr>
             </thead>
             <tbody>
@@ -87,6 +101,7 @@
                         </div>
     
                     </td>
+                  
     
                    
                 </tr>
@@ -97,3 +112,61 @@
         </table>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+
+        let batch_id = '<%=  report_id %>'
+       
+
+        methods.TrackUploads = function (params, _this, event) {
+
+            
+
+            var form = {
+                batch_id: batch_id
+            }
+            var url = _app.GetAuthURL("Track", "TrackUploads")
+
+            _app.Ajax(url, form, "json", function (res) {
+
+              if("total" in res){
+                  $("#VERIFIED").text(res.verified)
+                  $("#TOTAL").text(res.total)
+
+                  $(".progress-bar").css("width", res.percentage)
+                  $(".progress-bar").text(res.percentage)
+              }
+
+                if (res.success) {
+
+                }
+
+
+            })
+
+        }
+        let timer = 0
+        methods.TrackUploads()
+        let inter = setInterval(function(){
+            timer++
+            if(timer >= 60){
+                window.location.href =  window.location.href.toString()
+            }
+
+           $("#TRACK").text(timer)
+           
+            let get_v = $("#VERIFIED").text()
+            let get_t = $("#TOTAL").text()
+            if(get_v == get_t){
+                clearInterval(inter)
+            }
+            methods.TrackUploads()
+
+        }, 1000)
+      
+
+
+    })
+
+</script>

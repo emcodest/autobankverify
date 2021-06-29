@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 require("dotenv").config()
-
+TRACKER = []
 let server = ""
 /**
  * Get port from environment and store in Express.

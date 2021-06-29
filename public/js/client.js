@@ -313,3 +313,24 @@ methods.DeleteBatch = function (_p, _this, e) {
 
 
 }
+methods.RestartBatch = function (_p, _this, e) {
+    if(confirm("Are you sure ?") == false)
+    return
+  
+ 
+    var form = {batch_id: _p}
+    var url = _app.GetAuthURL("Track", "RestartBatch")
+    
+    _app.Ajax(url, form, "json", function (res) {
+        
+        if (res.success) {
+            setTimeout(() => {
+                window.location.href = window.location.href.toString()
+                
+            }, 3000);
+ 
+        }
+    })
+
+
+}

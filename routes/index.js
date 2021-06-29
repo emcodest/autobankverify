@@ -26,6 +26,7 @@ router.use(myLogger)
 const multer = require('multer');
 const upload = multer();
 
+
 router.post('/upload-sheet', upload.any(), async function (req, res) {
   
 //------------------------------------- UPLOAD SHEET
@@ -109,6 +110,12 @@ if(! req.user){
               }
             }
           }
+
+          //: INITIATE PROCESSING, THIS TIMES OUT IF SERVER IS RESTARTED
+          //: records = 1000, seconds = 300 - run the batch every 5 minutes
+          //: record = 2, seconds = 0.6 - process 2 records every 300ms
+          let config =  hl.RobotSettings()
+          hl.VerifyNuban2(config.record, batch_id, config.time)
         
         })
           return hl.Success(res, `Upload successful`)
@@ -230,7 +237,7 @@ router.get('/user/:view', handler.authenticated, async function (req, res, next)
           if(! skip_id){
         
           const batch_id = req.query["_id"] || -1
-          const report = await hl.bindRawQuery("select date_format(updated_at, '%d %M, %Y %H:%i:%s') as updated_at, id, batch_id, account_number, bank_name, account_name, status from cache_accounts where batch_id = $uid", {uid: batch_id})
+          const report = await hl.bindRawQuery("select date_format(updated_at, '%d %M, %Y %H:%i:%s') as updated_at, id, batch_id, account_number, bank_name, account_name, status from cache_accounts where batch_id = $uid limit 500", {uid: batch_id})
           odata.report = report
           odata.batch_name = await hl.bindRawQuery("select batch_name from batch_list where id = $idd", {idd: batch_id})
           odata.batch_name = odata.batch_name[0].batch_name
@@ -240,7 +247,7 @@ router.get('/user/:view', handler.authenticated, async function (req, res, next)
           }else{
             const get_verify =  req.query["_verified"] || false
        
-            const report = await hl.bindRawQuery("select date_format(updated_at, '%d %M, %Y %H:%i:%s') as updated_at, id, batch_id, account_number, bank_name, account_name, status from cache_accounts where status = $uid and user_id = $idd", {uid: get_verify, idd: user_id})
+            const report = await hl.bindRawQuery("select date_format(updated_at, '%d %M, %Y %H:%i:%s') as updated_at, id, batch_id, account_number, bank_name, account_name, status from cache_accounts where status = $uid and user_id = $idd limit 500", {uid: get_verify, idd: user_id})
             odata.report = report
             
             odata.batch_name = "n/a"
