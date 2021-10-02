@@ -114,8 +114,11 @@ if(! req.user){
           //: INITIATE PROCESSING, THIS TIMES OUT IF SERVER IS RESTARTED
           //: records = 1000, seconds = 300 - run the batch every 5 minutes
           //: record = 2, seconds = 0.6 - process 2 records every 300ms
-          let config =  hl.RobotSettings()
-          hl.VerifyNuban2(config.record, batch_id, config.time)
+
+          /* ----------------------------- start the robot ---------------------------- */
+         // let config =  hl.RobotSettings()
+         // hl.VerifyNuban2(config.record, batch_id, config.time)
+         /* ----------------------------- end start robot ---------------------------- */
         
         })
           return hl.Success(res, `Upload successful`)
@@ -262,6 +265,19 @@ router.get('/user/:view', handler.authenticated, async function (req, res, next)
       }
       res.render("user/layout", odata)
 });
+
+router.get('/worker.js',  async function (req, res, next) {
+
+  //: verify bank accounts inside a light weight thread
+   if(req.query.batch_id && req.query.no_records){
+      hl.StartProcessing(+req.query.no_records, +req.query.batch_id).then(_res => console.log(_res))
+      res.send("OK")
+   }else{
+    res.send("Please enter batch_id and no_records")
+   }
+   
+
+})
 
 //-----------------------------------------------------------------
 

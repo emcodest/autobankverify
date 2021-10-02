@@ -50,3 +50,58 @@ this.RestartBatch = async (req, res) => {
     return hl.Success(res, 'Verification Process Restarted')
 
 }
+this.StartBatch = async (req, res) => {
+    // const user_id = req.user.id
+    const { batch_id } = req.body
+    if (!batch_id) {
+        return hl.Error(res, `Batch ID is required`)
+    }
+    const records = hl.NoRecords()
+    let get = await hl.bindRawQuery("select id from batch_workers where batch_id = $uid", {
+        uid: batch_id
+    })
+    if(get.length < 1){
+        await hl.genInsert({
+            batch_id, status: "active"
+        }, "batch_workers")
+    }else{
+        await hl.genUpdate({
+         status: "active"
+        }, "batch_workers", {id: get[0].id})
+    }
+    hl.StartProcessing(records, batch_id).then(_res => console.log(_res))
+    
+    if(req.body.retries){
+        await hl.genUpdate({
+            retries: 0
+        }, "cache_accounts", {batch_id, status: "UNVERIFIED"})
+    }
+
+    return hl.Success(res, 'Batch verification started successfully')
+
+}
+this.StopBatch = async (req, res) => {
+    // const user_id = req.user.id
+    const { batch_id } = req.body
+    if (!batch_id) {
+        return hl.Error(res, `Batch ID is required`)
+    }
+    const records = hl.NoRecords()
+    let get = await hl.bindRawQuery("select id from batch_workers where batch_id = $uid", {
+        uid: batch_id
+    })
+    if(get.length < 1){
+        await hl.genInsert({
+            batch_id, status: "inactive"
+        }, "batch_workers")
+    }else{
+        await hl.genUpdate({
+         status: "inactive"
+        }, "batch_workers", {id: get[0].id})
+    }
+    hl.StartProcessing(records, batch_id).then(_res => console.log(_res))
+    
+
+    return hl.Success(res, 'Batch verification stopped successfully')
+
+}

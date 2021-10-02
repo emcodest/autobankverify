@@ -318,8 +318,9 @@ methods.RestartBatch = function (_p, _this, e) {
     return
   
  
-    var form = {batch_id: _p}
-    var url = _app.GetAuthURL("Track", "RestartBatch")
+    var form = {batch_id: _p, retries: 0}
+   // var url = _app.GetAuthURL("Track", "RestartBatch")
+    var url = _app.GetAuthURL("Track", "StartBatch")
     
     _app.Ajax(url, form, "json", function (res) {
         
@@ -328,6 +329,40 @@ methods.RestartBatch = function (_p, _this, e) {
                 window.location.href = window.location.href.toString()
                 
             }, 3000);
+ 
+        }
+    })
+
+
+}
+methods.StartBatch = function (_p, _this, e) {
+   
+  
+ 
+    var form = {batch_id: _p}
+    var url = _app.GetAuthURL("Track", "StartBatch")
+    
+    _app.Ajax(url, form, "json", function (res) {
+        
+        if (res.success) {
+         
+ 
+        }
+    })
+
+
+}
+methods.StopBatch = function (_p, _this, e) {
+   
+  
+ 
+    var form = {batch_id: _p}
+    var url = _app.GetAuthURL("Track", "StopBatch")
+    
+    _app.Ajax(url, form, "json", function (res) {
+        
+        if (res.success) {
+         
  
         }
     })
